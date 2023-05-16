@@ -1,0 +1,19 @@
+{
+  "name": "e2e-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test-common": "npx playwright test --config ./e2e-test/config/playwright.config.common.ts -g @smoke"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.ap-southeast-2.amazonaws.com/v1/repos/e2e-boilerplate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.33.0"
+  }
+}

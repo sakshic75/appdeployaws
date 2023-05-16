@@ -1,6 +1,6 @@
 #!/bin/bash
 database=Temp
-wait_time=30s
+wait_time=1s
 password=Passw@rd2022
 
 # wait for SQL Server to come up
@@ -13,6 +13,7 @@ echo importing data...
 
 for entry in "statements/tables/*.sql"
 do
+  pwd
   echo executing $entry
   /opt/mssql-tools/bin/sqlcmd -S 0.0.0.0 -U sa -d $database -P $password -i $entry
 done
