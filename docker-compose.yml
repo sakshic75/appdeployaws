@@ -16,3 +16,16 @@ services:
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD: Passw@rd2022
+  web:
+    build:
+      context: ./demoapp
+      target: runner
+    depends_on:
+      - mssql
+    command: npm run start
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DBHOST: mssql
+    

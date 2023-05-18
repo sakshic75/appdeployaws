@@ -4,7 +4,7 @@ const sqlConfig = {
   user: "sa",
   password: "Passw@rd2022",
   database: "Temp",
-  server: "localhost",
+  server: process.env.DBHOST || "localhost",
   port: 1433,
   pool: {
     max: 10,
