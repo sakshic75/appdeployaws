@@ -16,4 +16,6 @@ export class IpponHomepage {
   async goto() {
     await this.page.goto("https://au.ippon.tech");
   }
+
+  
 }

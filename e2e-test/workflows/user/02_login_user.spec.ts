@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import {ProductNewPage } from '../../pages/product.new.page';
 
 test("has title @skip", async ({ page }) => {
   await page.goto("https://playwright.dev/");
@@ -6,6 +7,7 @@ test("has title @skip", async ({ page }) => {
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Playwright/);
 });
+
 
 test("get started link @regression", async ({ page }) => {
   await page.goto("https://playwright.dev/");
