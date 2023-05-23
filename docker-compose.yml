@@ -16,6 +16,12 @@ services:
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD: Passw@rd2022
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S 0.0.0.0 -U sa -P "Passw@rd2022" -Q "SELECT id FROM [Temp].dbo.product" -b -o /dev/null
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
   web:
     build:
       context: ./demoapp
@@ -46,7 +52,14 @@ services:
     environment:
       NODE_ENV: development
       DBHOST: mssql
-     
-
+  test:
+    build:
+      context: ./e2e-test    
+    command: npm run test-title
+    ports:
+      - "9323:9323"
+    depends_on:
+      mssql:
+        condition: service_healthy
 
     
