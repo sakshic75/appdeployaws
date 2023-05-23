@@ -5,10 +5,10 @@ import { Layout } from "components/Layout";
 
 function ProductPage({ product }) {
   const router = useRouter();
-
+  const baseUrl = process.env.baseUrl;
   const handleDelete = async (id) => {
     try {
-      await axios.delete("/api/products/" + id);
+      await axios.delete(`${baseUrl}/api/products/` + id);
       toast.success("Task deleted");
       router.push("/");
     } catch (error) {
@@ -43,11 +43,12 @@ function ProductPage({ product }) {
 }
 
 export const getServerSideProps = async ({ query }) => {
-  const { data: product} = await axios.get(
-    "http://localhost:3000/api/products/" + query.id
+  const baseUrl = process.env.baseUrl;
+  const { data: product } = await axios.get(
+    `${baseUrl}/api/products/` + query.id
   );
 
-  console.log(product)
+  console.log(product);
 
   return {
     props: {

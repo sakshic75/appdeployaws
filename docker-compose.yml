@@ -20,6 +20,9 @@ services:
     build:
       context: ./demoapp
       target: runner
+      args:
+        PORT: '3000'
+        TITLE: ''
     depends_on:
       - mssql
     command: npm run start
@@ -28,4 +31,22 @@ services:
     environment:
       NODE_ENV: development
       DBHOST: mssql
+  webtwo:
+    build:
+      context: ./demoapp
+      target: runner
+      args:
+        PORT: '3010'
+        TITLE: 'CHANGE TITLE'
+    depends_on:
+      - mssql
+    command: npm run start 
+    ports:
+      - "3010:3010"
+    environment:
+      NODE_ENV: development
+      DBHOST: mssql
+     
+
+
     

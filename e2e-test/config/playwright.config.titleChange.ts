@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 /**
  * Read environment variables from file.
@@ -10,9 +10,9 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: "../workflows",
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -20,31 +20,61 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ["html"],
+    ["list"],
+    ["json", { outputFile: "../../test-results/test-results.json" }],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
-
+    baseURL: "http://127.0.0.1:3010",
+    video: "on",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: "on-first-retry",
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: "chromium",
+      grep: /@new/,
+      use: {
+        ...devices["Desktop Chrome"],
+        baseURL: "http://127.0.0.1:3000",
+      },
     },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: "firefox",
+      grep: /@new/,
+      use: { ...devices["Desktop Firefox"], baseURL: "http://127.0.0.1:3000" },
     },
 
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: "Mobile Chrome",
+      grep: /@new/,
+      use: { ...devices["Pixel 5"], baseURL: "http://127.0.0.1:3000" },
+    },
+    {
+      name: "chromium title",
+      grep: /@new|@title/,
+      use: {
+        ...devices["Desktop Chrome"],
+        baseURL: "http://127.0.0.1:3010",
+      },
+    },
+
+    {
+      name: "firefox title",
+      grep: /@new|@title/,
+      use: { ...devices["Desktop Firefox"], baseURL: "http://127.0.0.1:3010" },
+    },
+
+    {
+      name: "Mobile Chrome title",
+      grep: /@new|@title/,
+      use: { ...devices["Pixel 5"], baseURL: "http://127.0.0.1:3010" },
     },
 
     /* Test against mobile viewports. */

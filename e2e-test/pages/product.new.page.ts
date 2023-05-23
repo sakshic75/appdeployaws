@@ -19,6 +19,6 @@ export class ProductNewPage {
 
   async goto() {
     //await this.page.goto("http://localhost:3000/new/", {waitUntil: "networkidle"});
-    await this.page.goto("http://localhost:3000/new/");
+    await this.page.goto("/new/");
   }
 }

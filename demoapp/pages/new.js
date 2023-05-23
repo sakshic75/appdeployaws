@@ -14,9 +14,8 @@ function NewPage() {
 export default NewPage;
 
 export const getServerSideProps = async (context) => {
-  console.log(context);
-
-  const res = await axios.get("http://localhost:3000/api/products");
+  const baseUrl = process.env.baseUrl;
+  const res = await axios.get(`${baseUrl}/api/products`);
 
   return {
     props: {

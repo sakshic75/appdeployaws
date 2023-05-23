@@ -9,12 +9,13 @@ export function ProductForm() {
     description: "",
     price: 0,
   });
+  const baseUrl = process.env.baseUrl;
   const router = useRouter();
 
   useEffect(() => {
     const fetchProduct = async (id) => {
       try {
-        const { data } = await axios.get("/api/products/" + id);
+        const { data } = await axios.get(`${baseUrl}/api/products/` + id);
         setProduct(data);
       } catch (error) {
         console.error(error);
@@ -34,7 +35,7 @@ export function ProductForm() {
     e.preventDefault();
     try {
       if (router.query?.id) {
-        await axios.put("/api/products/" + router.query.id, {
+        await axios.put(`${baseUrl}/api/products/` + router.query.id, {
           name: product.name,
           description: product.description,
           price: product.price,

@@ -7,19 +7,19 @@ test.describe("Check the functionality of the new product page @new", () => {
     pageNew = new ProductNewPage(page);
     await pageNew.goto();
   });
-  test("Check the URL for the New Product Page ", async ({ page }) => {
-    await expect(pageNew.page).toHaveURL("http://localhost:3000/new");
+  test("Check the URL for the New Product Page", async ({ page }) => {
+    await expect(pageNew.page).toHaveURL("/new");
   });
-  test("has title Product Name ", async ({ page }) => {
+  test("has title Product Name @smoke", async ({ page }) => {
     await expect(pageNew.getNameInput).toBeDefined();
   });
-  test("has title Product Price ", async ({ page }) => {
+  test("has title Product Price @smoke", async ({ page }) => {
     await expect(pageNew.getPriceInput).toBeDefined();
   });
-  test("has title Write a Description ", async ({ page }) => {
+  test("has title Write a Description @smoke", async ({ page }) => {
     await expect(pageNew.getDescriptionInput).toBeDefined();
   });
-  test("Check the placeholder for labels @new", async ({ page }) => {
+  test("Check the placeholder for labels ", async ({ page }) => {
     const label = pageNew.getNameInput;
     const placeholder = await label.getAttribute("placeholder");
     expect(placeholder).toBe("name");
@@ -29,6 +29,6 @@ test.describe("Check the functionality of the new product page @new", () => {
     await pageNew.getPriceInput.fill("2");
     await pageNew.getDescriptionInput.fill("Queensland red apples");
     await pageNew.getSaveButtonProduct.click();
-    await expect(pageNew.page).toHaveURL("http://localhost:3000/products");
+    await expect(pageNew.page).toHaveURL("/products");
   });
 });
