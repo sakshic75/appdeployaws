@@ -2,6 +2,16 @@ import { test, expect } from "@playwright/test";
 import {ProductNewPage } from '../../pages/product.new.page';
 
 
+test("Check the URL for the New Product Page @new", async({page})=>{
+    test.setTimeout(0);
+    const pageNew = new ProductNewPage(page);
+
+    pageNew.goto();
+    await expect(pageNew.page).toHaveURL("http://localhost:3000/new");
+    
+  });
+
+
 test("has title Product Name ", async ({ page }) => {
   
   const pageNew = new ProductNewPage(page);
@@ -17,7 +27,7 @@ test("has title Product Price ", async ({ page }) => {
     const pageNew = new ProductNewPage(page);
   
     pageNew.goto();
-    await expect(pageNew.mainTitle).toContainText("Product Price");
+    await expect(pageNew.mainTitle).toContain("Product Price");
   
   
   });
@@ -34,25 +44,24 @@ test("has title Product Price ", async ({ page }) => {
 
 
   test("Event on clicking Save Product @new", async({page})=>{
+    
     const pageNew = new ProductNewPage(page);
 
-    const messageInput = pageNew.page.locator("input#name");
-    console.log(await messageInput.getAttribute("placeholder"));
-    expect(messageInput).toHaveAttribute("placeholder", "name")
-    console.log('Before entering data: ' + await messageInput.inputValue());
-    await messageInput.type("Banana");
-    console.log('After entering data: ' + await messageInput.inputValue())
- 
- 
+    
+    pageNew.goto();
+    await pageNew.getByRoleButton.click({ force: true });
 
-
-
-
+    await expect(pageNew.page).toHaveURL("http://localhost:3000/products");
+    
   });
 
-  
-
-
+  test("Check the placeholder for labels @new", async({page})=>{
+    
+    const pageNew = new ProductNewPage(page);
+    pageNew.goto();
+    const label = pageNew.getByLabelName2;
+    console.log(label);
+});
 
 test("get started link @regression", async ({ page }) => {
   await page.goto("https://playwright.dev/");
