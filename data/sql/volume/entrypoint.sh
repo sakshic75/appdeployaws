@@ -1,15 +1,19 @@
 #!/bin/bash
 database=Temp
-wait_time=1s
+wait_time=15s
 password=Passw@rd2022
 
 # wait for SQL Server to come up
-echo importing data will start in $wait_time...
+echo generate db will start in $wait_time...
 sleep $wait_time
-echo importing data...
+echo generate db...
 
 # run the init script to create the DB and the tables in /table
 /opt/mssql-tools/bin/sqlcmd -S 0.0.0.0 -U sa -P $password -i statements/init.sql
+
+echo importing tables will start in $wait_time...
+sleep $wait_time
+echo importing data...
 
 for entry in "statements/tables/*.sql"
 do
