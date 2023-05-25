@@ -1,29 +1,42 @@
 # Buildspec for Container 1
 # File: buildspec-container1.yml
+# version: 0.2
+
+# phases:
+#   build:
+#     commands:
+#       - docker build -t e2e-boilerplate/demoapp demoapp/.
+#       - docker push e2e-boilerplate/demoapp
+
 version: 0.2
 
 phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - docker build -t e2e-boilerplate/demoapp demoapp/.
-      - docker push e2e-boilerplate/demoapp
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t $AWS_IMAGE_DEMPO_APP:$AWS_IMAGE_TAG demoapp/.
+      - docker tag $AWS_IMAGE_DEMPO_APP:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG  
 
-# Buildspec for Container 2
-# File: buildspec-container2.yml
-# version: 0.2
+      - docker build -t $AWS_IMAGE_TEST:$AWS_IMAGE_TAG e2e-test/.
+      - docker tag $AWS_IMAGE_TEST:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST:$AWS_IMAGE_TAG 
 
-# phases:
-#   build:
-#     commands:
-#       - docker build -t data/sql .
-#       - docker push data/sql
+      - docker build -t $AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG data/sql/.
+      - docker tag $AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG     
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
 
-# # Buildspec for Container 3
-# # File: buildspec-container3.yml
-# version: 0.2
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST:$AWS_IMAGE_TAG
 
-# phases:
-#   build:
-#     commands:
-#       - docker build -t e2e-test .
-#       - docker push e2e-test
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG
+
+
+
+
