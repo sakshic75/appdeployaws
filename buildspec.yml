@@ -19,7 +19,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t $AWS_IMAGE_DEMPO_APP:latest demoapp/.
+      - docker build --tag demoapp:latest demoapp/.
       - docker tag $AWS_IMAGE_DEMPO_APP:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:latest
 
       - docker build -t $AWS_IMAGE_TEST e2e-test/.
