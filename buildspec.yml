@@ -25,7 +25,7 @@ phases:
       - docker build --tag  test-e2e:latest e2e-test/.
       - docker tag  test-e2e:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
 
-      - docker build -t mssql:latest data/sql/.
+      - docker build --tag mssql:latest data/sql/.
       - docker tag mssql:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest   
   post_build:
     commands:
@@ -33,7 +33,7 @@ phases:
       - echo Pushing the Docker image...
       
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/demoapp:latest
-      
+
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
 
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest
