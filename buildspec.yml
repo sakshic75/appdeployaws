@@ -5,8 +5,8 @@ version: 0.2
 phases:
   build:
     commands:
-      - docker build -t e2e-boilerplate/demoapp .
-      - docker push demoapp
+      - docker build -t e2e-boilerplate/demoapp demoapp/.
+      - docker push e2e-boilerplate/demoapp
 
 # Buildspec for Container 2
 # File: buildspec-container2.yml
