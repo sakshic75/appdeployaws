@@ -10,20 +10,20 @@ phases:
 
 # Buildspec for Container 2
 # File: buildspec-container2.yml
-version: 0.2
+# version: 0.2
 
-phases:
-  build:
-    commands:
-      - docker build -t data/sql .
-      - docker push data/sql
+# phases:
+#   build:
+#     commands:
+#       - docker build -t data/sql .
+#       - docker push data/sql
 
-# Buildspec for Container 3
-# File: buildspec-container3.yml
-version: 0.2
+# # Buildspec for Container 3
+# # File: buildspec-container3.yml
+# version: 0.2
 
-phases:
-  build:
-    commands:
-      - docker build -t e2e-test .
-      - docker push e2e-test
+# phases:
+#   build:
+#     commands:
+#       - docker build -t e2e-test .
+#       - docker push e2e-test
