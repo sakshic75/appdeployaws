@@ -1,8 +1,10 @@
 version: '3.8'
 services:
   mssql:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    # image: mcr.microsoft.com/mssql/server:2022-latest
     platform: linux/amd64
+    build:
+      context: ./data/sql
     ports:
       - 1433:1433
     volumes:
@@ -12,7 +14,7 @@ services:
     # bash will be executed from that path, our scripts folder
     working_dir: /usr/src/app 
     # run the entrypoint.sh that will import the data AND sqlserver
-    command: sh -c ' chmod +x ./entrypoint.sh; ./entrypoint.sh & /opt/mssql/bin/sqlservr;'
+    # command: sh -c ' chmod +x ./entrypoint.sh; ./entrypoint.sh & /opt/mssql/bin/sqlservr;'
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD: Passw@rd2022
