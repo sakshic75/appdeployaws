@@ -20,22 +20,22 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build --tag demoapp:latest demoapp/.
-      - docker tag $AWS_IMAGE_DEMPO_APP:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:latest
+      - docker tag $demoapp:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/demoapp:latest
 
-      - docker build -t $AWS_IMAGE_TEST e2e-test/.
-      - docker tag $AWS_IMAGE_TEST $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST
+      # - docker build -t $AWS_IMAGE_TEST e2e-test/.
+      # - docker tag $AWS_IMAGE_TEST $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST
 
-      - docker build -t $AWS_IMAGE_MSSQL data/sql/.
-      - docker tag $AWS_IMAGE_MSSQL $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL    
+      # - docker build -t $AWS_IMAGE_MSSQL data/sql/.
+      # - docker tag $AWS_IMAGE_MSSQL $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL    
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/demoapp
 
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST
 
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL
 
 
 
