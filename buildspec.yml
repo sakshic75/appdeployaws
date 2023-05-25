@@ -20,10 +20,10 @@ phases:
 
 # Buildspec for Container 3
 # File: buildspec-container3.yml
-version: 0.2
+# version: 0.2
 
-phases:
-  build:
-    commands:
-      - docker build -t e2e-boilerplate/e2e-test .
-      - docker push e2e-boilerplate/e2e-test
+# phases:
+#   build:
+#     commands:
+#       - docker build -t e2e-boilerplate/e2e-test .
+#       - docker push e2e-boilerplate/e2e-test
