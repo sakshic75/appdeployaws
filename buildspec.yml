@@ -5,7 +5,7 @@ version: 0.2
 phases:
   build:
     commands:
-      - docker build -t demoapp .
+      - docker build -t e2e-boilerplate/demoapp .
       - docker push demoapp
 
 # Buildspec for Container 2
