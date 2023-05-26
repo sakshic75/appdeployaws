@@ -21,11 +21,20 @@ phases:
       - docker build --tag  $AWS_IMAGE_DEMO_APP:latest demoapp/.
       - docker tag $AWS_IMAGE_DEMO_APP:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:latest
 
-      - docker build --tag  test-e2e:latest e2e-test/.
-      - docker tag  test-e2e:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
+      # - docker build --tag  demoapp:latest demoapp/.
+      # - docker tag demoapp:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/demoapp:latest
 
-      - docker build --tag mssql:latest data/sql/.
-      - docker tag mssql:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest   
+      - docker build --tag  $AWS_IMAGE_TEST:latest e2e-test/.
+      - docker tag $AWS_IMAGE_TEST:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST:latest
+
+      # - docker build --tag  test-e2e:latest e2e-test/.
+      # - docker tag  test-e2e:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
+
+      # - docker build --tag mssql:latest data/sql/.
+      # - docker tag mssql:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest   
+
+      - docker build --tag  $AWS_IMAGE_MSSQL:latest data/sql/.
+      - docker tag $AWS_IMAGE_MSSQL:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:latest
   post_build:
     commands:
       - echo Build completed on `date`
@@ -33,9 +42,13 @@ phases:
       
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:latest
 
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST:latest
 
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:latest
+
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
+
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest
 
      
 
