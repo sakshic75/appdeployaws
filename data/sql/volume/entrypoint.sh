@@ -1,7 +1,9 @@
 #!/bin/bash
 database=Temp
-wait_time=15s
+wait_time=40s
 password=Passw@rd2022
+
+/opt/mssql/bin/sqlservr &
 
 # wait for SQL Server to come up
 echo generate db will start in $wait_time...
