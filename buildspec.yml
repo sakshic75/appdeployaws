@@ -17,8 +17,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...          
-      - docker build --tag  $AWS_IMAGE_DEMO_APP:latest demoapp/.
+      - echo Building the Docker image...
+      - docker build --tag $AWS_IMAGE_DEMO_APP:latest demoapp/.
       - docker tag $AWS_IMAGE_DEMO_APP:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:latest
 
       # - docker build --tag  demoapp:latest demoapp/.
@@ -31,7 +31,7 @@ phases:
       # - docker tag  test-e2e:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
 
       # - docker build --tag mssql:latest data/sql/.
-      # - docker tag mssql:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest   
+      # - docker tag mssql:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest
 
       - docker build --tag  $AWS_IMAGE_MSSQL:latest data/sql/.
       - docker tag $AWS_IMAGE_MSSQL:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:latest
@@ -39,7 +39,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      
+
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:latest
 
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_TEST:latest
@@ -49,9 +49,3 @@ phases:
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
 
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest
-
-     
-
-
-
-

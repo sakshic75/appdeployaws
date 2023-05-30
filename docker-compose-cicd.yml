@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  mssql:
+    # image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    build:
+      context: ./data/sql
+    ports:
+      - 1433:1433
+    volumes:
+      - /var/opt/mssql
+      # we copy our scripts onto the container
+      - ./data/sql/volume:/usr/src/app 
+    # bash will be executed from that path, our scripts folder
+    working_dir: /usr/src/app 
+    # run the entrypoint.sh that will import the data AND sqlserver
+    # command: sh -c ' chmod +x ./entrypoint.sh; ./entrypoint.sh & /opt/mssql/bin/sqlservr;'
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Passw@rd2022
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S 0.0.0.0 -U sa -P "Passw@rd2022" -Q "SELECT id FROM [Temp].dbo.product" -b -o /dev/null
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+  web:
+    image: "${AWS_IMAGE_DEMO_APP}:latest"
+    args:
+      PORT: '3000'
+      TITLE: ''
+    depends_on:
+      - mssql
+    command: npm run start
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DBHOST: mssql
+  test:
+    build:
+      context: ./e2e-test
+    ports:
+      - "9323:9323"
+    depends_on:
+      mssql:
+        condition: service_healthy
+
+    
