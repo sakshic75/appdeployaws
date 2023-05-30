@@ -10,6 +10,9 @@
 version: 0.2
 
 phases:
+  install:
+  runtime-versions:
+    nodejs: 12
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -21,7 +24,7 @@ phases:
       - docker build --tag $AWS_IMAGE_DEMO_APP:latest demoapp/.
       - ./build-docker-compose.sh
       # Install Playwright browsers and dependencies
-      - npm install e2e-test/.
+      - npm install -g npm
       - npx playwright install --with-deps
 
 
