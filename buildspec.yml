@@ -20,8 +20,6 @@ phases:
       - echo Building the Docker image...
       - docker build --tag $AWS_IMAGE_DEMO_APP:latest demoapp/.
       - ./build-docker-compose.sh
-      # Install NPM packages
-      - npm install
       # Install Playwright browsers and dependencies
       - npx playwright install --with-deps
 
@@ -56,4 +54,4 @@ phases:
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
 
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest
-      
+
