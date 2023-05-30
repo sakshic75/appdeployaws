@@ -39,7 +39,7 @@ services:
   test:
     build:
       context: ./e2e-test    
-    command: npm run test-title
+    command: npm run test-common
     ports:
       - "9323:9323"
     depends_on:
