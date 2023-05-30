@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-common": "npx playwright test --config ./config/playwright.config.common.ts",
-    "test-title": "npx playwright test --config ./config/playwright.config.titleChange.ts "
+    "test-title": "npx playwright show-report --config ./config/playwright.config.titleChange.ts "
   },
   "repository": {
     "type": "git",
