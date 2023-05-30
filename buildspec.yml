@@ -23,11 +23,6 @@ phases:
       - echo Building the Docker image...
       - docker build --tag $AWS_IMAGE_DEMO_APP:latest demoapp/.
       - ./build-docker-compose.sh
-      # Install Playwright browsers and dependencies
-      - npm ci                                             ║
-      - npx playwright install
-
-
       - docker compose -f docker-compose-cicd.yml run test
       - docker tag $AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
 

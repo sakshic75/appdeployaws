@@ -4,6 +4,9 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /test
 
+RUN sh -c 'npm install @playwright/test'
+RUN sh -c 'npx playwright install'
+
 COPY  package.json package-lock.json ./
 
 RUN \
@@ -14,5 +17,6 @@ RUN \
   fi
 
 COPY . .
+
 
 
