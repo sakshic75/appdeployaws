@@ -24,8 +24,7 @@ phases:
       - docker build --tag $AWS_IMAGE_DEMO_APP:latest demoapp/.
       - ./build-docker-compose.sh
       # Install Playwright browsers and dependencies
-      - npm install -g npm
-      - npm install @playwright/test                                              ║
+      - npm ci                                             ║
       - npx playwright install
 
 
