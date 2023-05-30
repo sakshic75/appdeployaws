@@ -25,6 +25,7 @@ phases:
       - ./build-docker-compose.sh
       # Install Playwright browsers and dependencies
       - npm install -g npm
+      - npm install @playwright/test                                              ║
       - npx playwright install
 
 
