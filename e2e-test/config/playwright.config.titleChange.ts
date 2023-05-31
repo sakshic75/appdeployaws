@@ -48,20 +48,20 @@ export default defineConfig({
       grep: /@new/,
       use: {
         ...devices["Desktop Chrome"],
-        baseURL: "http://127.0.0.1:3000",
+        baseURL: "http://127.0.0.1:3010",
       },
     },
 
     {
       name: "firefox",
       grep: /@new/,
-      use: { ...devices["Desktop Firefox"], baseURL: "http://127.0.0.1:3000" },
+      use: { ...devices["Desktop Firefox"], baseURL: "http://127.0.0.1:3010" },
     },
 
     {
       name: "Mobile Chrome",
       grep: /@new/,
-      use: { ...devices["Pixel 5"], baseURL: "http://127.0.0.1:3000" },
+      use: { ...devices["Pixel 5"], baseURL: "http://127.0.0.1:3010" },
     },
     {
       name: "chromium title",
