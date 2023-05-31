@@ -25,7 +25,10 @@ phases:
       - ./build-docker-compose.sh
       - npm i -D playwright
       - npx playwright install
-      - docker compose -f docker-compose-cicd.yml run test --exit-code-from test
+      - docker compose -f docker-compose-cicd.yml run test
+      - rc=$?
+      - docker-compose down
+      - exit $rc
       - docker tag $AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
 
       # - docker build --tag  demoapp:latest demoapp/.
