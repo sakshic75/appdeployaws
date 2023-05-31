@@ -25,6 +25,12 @@ export default defineConfig({
     ["list"],
     ["json", { outputFile: "../../test-results/test-results.json" }],
   ],
+
+  // webServer: {
+  //   command: 'npm run test-title',
+  //   url: 'http://localhost:3010',
+  //   timeout: 120000,
+  // },
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -101,7 +107,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
+  //   url: 'http://127.0.0.1:3010',
   //   reuseExistingServer: !process.env.CI,
   // },
 });
