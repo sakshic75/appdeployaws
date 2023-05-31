@@ -44,5 +44,6 @@ services:
       - "9323:9323"
     depends_on:
       - web
+    network_mode: host
      
 
