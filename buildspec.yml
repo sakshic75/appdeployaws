@@ -54,3 +54,7 @@ phases:
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
 
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest
+reports:
+  new-report-group: #demoapp playwright
+    files: "test-results.xml"
+    base-directory: "./reports"
