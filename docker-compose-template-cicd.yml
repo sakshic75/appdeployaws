@@ -40,8 +40,8 @@ services:
     build:
       context: ./e2e-test    
     command: npm run test-common
-    ports:
-      - "9323:9323"
+    volumes:
+      - ./reports:/test/reports
     depends_on:
       - web
     network_mode: host

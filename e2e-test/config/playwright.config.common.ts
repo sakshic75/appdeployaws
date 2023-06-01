@@ -11,6 +11,7 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "../workflows/",
+  outputDir: "../reports",
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -23,7 +24,7 @@ export default defineConfig({
   reporter: [
     ["line"],
     ["list"],
-    ["json", { outputFile: "../../test-results/test-results.json" }],
+    ["json", { outputFile: "../reports/test-results.json" }],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
