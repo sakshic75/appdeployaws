@@ -3,7 +3,6 @@ import { ProductNewPage } from "../../pages/product.new.page";
 
 test.describe("Check the functionality of the new product page @new", () => {
   let pageNew: ProductNewPage;
-  test.setTimeout(3000);
   test.beforeEach(async ({ page }) => {
     pageNew = new ProductNewPage(page);
     await pageNew.goto();
