@@ -23,8 +23,7 @@ phases:
       - echo Building the Docker image...
       - docker build --tag $AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG demoapp/.
       - ./build-docker-compose.sh
-      - mkdir reports
-      - docker compose -f docker-compose-cicd.yml run test
+      - docker compose -f docker-compose-cicd.yml build test
 
       # - docker build --tag  demoapp:latest demoapp/.
       # - docker tag demoapp:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/demoapp:latest
@@ -54,3 +53,7 @@ phases:
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/test-e2e:latest
 
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/mssql:latest
+  test : 
+    commands : 
+     -  mkdir reports
+     - docker compose -f docker-compose-cicd.yml run test
