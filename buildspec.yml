@@ -58,3 +58,7 @@ reports:
   new-report-group: #demoapp playwright
     files: "test-results.xml"
     base-directory: "./reports"
+artifacts:
+  files: "**.*"
+  base-directory: "./reports"
+  name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
