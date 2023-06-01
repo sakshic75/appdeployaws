@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   mssql:
+    image: "${AWS_IMAGE_MSSQL}:${AWS_IMAGE_TAG}"
     # image: mcr.microsoft.com/mssql/server:2022-latest
     platform: linux/amd64
     build:
