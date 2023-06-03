@@ -19,8 +19,8 @@ phases:
       - mkdir reports
       - docker compose -f docker-compose-cicd.yml run test
       - docker tag $AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
-      - docker tag $AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG 
-  
+      - docker tag $AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG
+
   post_build:
     on-failure: ABORT
     commands:
@@ -29,12 +29,26 @@ phases:
 
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
 
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG 
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG
+
+      - sed -i 's|<APP_NAME>|'$AWS_IMAGE_DEMO_APP'|g' taskdef.json
+
+      - sed -i 's|<AWS_ACCOUNT_ID>|'$AWS_ACCOUNT_ID'|g' taskdef.json
+
+      - sed -i 's|<IMAGE_NAME>|'$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP'\:'$AWS_IMAGE_TAG'|g' taskdef.json
+
+      - sed -i 's|<IMAGE_DB_NAME>|'$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL'\:'$AWS_IMAGE_TAG'|g' taskdef.json
+
+      - sed -i 's|<IAM_EXEC_ROLE>|'$IAM_EXEC_ROLE'|g' taskdef.json
+
+      - sed -i 's|<REGION>|'$AWS_DEFAULT_REGION'|g' taskdef.json
 reports:
   new-report-group: #demoapp playwright
     files: "test-results.xml"
     base-directory: "./reports"
+# artifacts:
+#   files: "**.*"
+#   base-directory: "./reports"
+#   name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
 artifacts:
-  files: "**.*"
-  base-directory: "./reports"
-  name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
+      files: taskdef.json

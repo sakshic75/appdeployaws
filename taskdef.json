@@ -1,0 +1,33 @@
+{
+    "family": "demoapp-defintion",
+    "networkMode": "awsvpc",
+    "executionRoleArn": "<IAM_EXEC_ROLE>",
+    "containerDefinitions": [
+        {
+            "name": "<APP_NAME>",
+            "image": "<IMAGE_NAME>",
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "cpu": 256,
+            "memory": 512
+        },
+        {
+            "name": "<DB_NAME>",
+            "image": "<IMAGE_DB_NAME>",
+            "portMappings": [
+                {
+                    "containerPort": 1433,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "cpu": 256,
+            "memory": 512
+        }
+    ]
+}
