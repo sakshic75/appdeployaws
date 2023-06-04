@@ -33,6 +33,8 @@ phases:
 
       - sed -i 's|<APP_NAME>|'$AWS_IMAGE_DEMO_APP'|g' taskdef.json
 
+      - sed -i 's|<DB_NAME>|'$AWS_IMAGE_MSSQL'|g' taskdef.json
+
       - sed -i 's|<AWS_ACCOUNT_ID>|'$AWS_ACCOUNT_ID'|g' taskdef.json
 
       - sed -i 's|<IMAGE_NAME>|'$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP'\:'$AWS_IMAGE_TAG'|g' taskdef.json
