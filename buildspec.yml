@@ -53,4 +53,7 @@ reports:
 #   base-directory: "./reports"
 #   name: builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
 artifacts:
-      files: taskdef.json
+      files: 
+          - taskdef.json
+          - imageDetail.json
+          - appspec.yaml
