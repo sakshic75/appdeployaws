@@ -44,7 +44,7 @@ phases:
       - sed -i 's|<IAM_EXEC_ROLE>|'$IAM_EXEC_ROLE'|g' taskdef.json
 
       - sed -i 's|<REGION>|'$AWS_DEFAULT_REGION'|g' taskdef.json
-      - aws ecs register-task-definition --cli-input-json file://taskdef.json --requires-compatibilities "FARGATE"
+      - aws ecs register-task-definition --cli-input-json file://taskdef.json
       - aws ecs create-service --service-name my-service --cli-input-json file://create-service.json
 reports:
   new-report-group: #demoapp playwright
