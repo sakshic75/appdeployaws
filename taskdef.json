@@ -3,13 +3,14 @@
     "networkMode": "awsvpc",
     "executionRoleArn": "<IAM_EXEC_ROLE>",
     "requiresCompatibilities" : ["FARGATE"],
-    "essential":true,
+    
     "cpu": "256",
     "memory": "512",
     "containerDefinitions": [
         {
             "name": "<APP_NAME>",
             "image": "<IMAGE_NAME>",
+            "essential":true,
             "portMappings": [
                 {
                     "containerPort": 3000,
@@ -22,6 +23,7 @@
         {
             "name": "<DB_NAME>",
             "image": "<IMAGE_DB_NAME>",
+            "essential":true,
             "portMappings": [
                 {
                     "containerPort": 1433,
