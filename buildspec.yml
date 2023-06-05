@@ -40,9 +40,7 @@ phases:
       - sed -i 's|<IMAGE_NAME>|'$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP'\:'$AWS_IMAGE_TAG'|g' taskdef.json
 
       - sed -i 's|<IMAGE_DB_NAME>|'$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL'\:'$AWS_IMAGE_TAG'|g' taskdef.json
-
-      - sed -i 's|<IAM_EXEC_ROLE>|'$IAM_EXEC_ROLE'|g' taskdef.json
-
+    
       - sed -i 's|<REGION>|'$AWS_DEFAULT_REGION'|g' taskdef.json
       - aws ecs register-task-definition --cli-input-json file://taskdef.json
       - aws ecs create-service --service-name my-service --cli-input-json file://create-service.json
