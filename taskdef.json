@@ -27,8 +27,8 @@
             ],
             "essential": true,
             "cpu": 256,
-            "memory": 512,
-            "family": "test"
+            "memory": 512
+           
         }
     ]
 }
