@@ -6,6 +6,11 @@
             "targetGroupArn": "arn:aws:elasticloadbalancing:ap-southeast-2:914221124747:targetgroup/target-e2e-test/9f3177d32e03fce8",
             "containerName": "demoapp",
             "containerPort": 3000
+        },
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-southeast-2:914221124747:targetgroup/target-e2e-test/9f3177d32e03fce8",
+            "containerName": "mssql",
+            "containerPort": 1433
         }
     ],
     "desiredCount": 1,
@@ -16,11 +21,11 @@
     "networkConfiguration": {
         "awsvpcConfiguration": {
             "subnets": [
-                "subnet-1",
-                "subnet-2"
+                "subnet-01ddef66",
+                "subnet-c7133c8e"
             ],
             "securityGroups": [
-                "security-group-1"
+                "sg-0c5811164674fbe17"
             ],
             "assignPublicIp": "ENABLED"
         }
