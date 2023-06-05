@@ -12,12 +12,10 @@
                     "protocol": "tcp"
                 }
             ],
-            "requiresCompatibilities": [
-                "FARGATE"
-            ],
             "essential": true,
             "cpu": 256,
-            "memory": 512
+            "memory": 512,
+            "requiresCompatibilities" : "FARGATE"
         },
         {
             "name": "<DB_NAME>",
@@ -28,12 +26,10 @@
                     "protocol": "tcp"
                 }
             ],
-            "requiresCompatibilities": [
-                "FARGATE"
-            ],
             "essential": true,
             "cpu": 256,
-            "memory": 512
+            "memory": 512,
+            "requiresCompatibilities": "FARGATE"
            
         }
     ]
