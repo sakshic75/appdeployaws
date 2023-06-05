@@ -11,12 +11,7 @@
                     "containerPort": 3000,
                     "protocol": "tcp"
                 }
-            ],
-            "requiresCompatibilities" : "FARGATE",
-            "networkMode": "awsvpc",
-            "essential": true,
-            "cpu": 256,
-            "memory": 512
+            ]
             
         },
         {
@@ -27,13 +22,12 @@
                     "containerPort": 1433,
                     "protocol": "tcp"
                 }
-            ],
-            "requiresCompatibilities" : "FARGATE",
-            "networkMode": "awsvpc",
-            "essential": true,
-            "cpu": 256,
-            "memory": 512
+            ]
            
         }
-    ]
+    ],
+    "requiresCompatibilities" : "FARGATE",
+    "essential": true,
+    "cpu": 256,
+    "memory": 512
 }
