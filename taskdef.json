@@ -12,10 +12,12 @@
                     "protocol": "tcp"
                 }
             ],
+            "requiresCompatibilities" : "FARGATE",
+            "networkMode": "awsvpc",
             "essential": true,
             "cpu": 256,
-            "memory": 512,
-            "requiresCompatibilities" : "FARGATE"
+            "memory": 512
+            
         },
         {
             "name": "<DB_NAME>",
@@ -26,10 +28,11 @@
                     "protocol": "tcp"
                 }
             ],
+            "requiresCompatibilities" : "FARGATE",
+            "networkMode": "awsvpc",
             "essential": true,
             "cpu": 256,
-            "memory": 512,
-            "requiresCompatibilities": "FARGATE"
+            "memory": 512
            
         }
     ]
