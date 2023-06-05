@@ -45,7 +45,7 @@ phases:
       - sed -i 's|<IMAGE_DB_NAME>|'$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL'\:'$AWS_IMAGE_TAG'|g' taskdef.json
     
       - sed -i 's|<REGION>|'$AWS_DEFAULT_REGION'|g' taskdef.json
-      - docker run --name app1 -p 3000:3000 -d $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
+      - docker run --name app1 -p 3010:3010 -d $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
       - docker run --name sql -p 1433:1433 -d $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG
       - http://localhost:3000/new
       # - aws ecs register-task-definition --cli-input-json file://taskdef.json --requires-compatibilities "FARGATE" 
