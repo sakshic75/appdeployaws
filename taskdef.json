@@ -12,9 +12,8 @@
                     "protocol": "tcp"
                 }
             ],
-            
             "cpu": "256",
-            "memory": 512
+            "memory": "512"
             
         },
         {
@@ -32,6 +31,6 @@
            
         }
     ],
-    "requiresCompatibilities" : "FARGATE",
+    "requiresCompatibilities" : "FARGATE"
    
 }
