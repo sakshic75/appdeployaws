@@ -32,6 +32,9 @@
            
         }
     ],
-    "requiresCompatibilities" : ["FARGATE"]
+    "requiresCompatibilities" : ["FARGATE"],
+    "essential":true,
+    "cpu": 256,
+    "memory": 512
    
 }
