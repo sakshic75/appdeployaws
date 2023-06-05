@@ -1,7 +1,7 @@
 {
     "family": "demoapp-defintion",
     "networkMode": "awsvpc",
-    "executionRoleArn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+    "executionRoleArn": "arn:aws:iam::914221124747:role/service-role/codebuild-project-test-service-role",
     "requiresCompatibilities" : ["FARGATE"],
     "cpu": "256",
     "memory": "512",
