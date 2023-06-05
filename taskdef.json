@@ -12,6 +12,9 @@
                     "protocol": "tcp"
                 }
             ],
+            "requiresCompatibilities": [
+                "FARGATE"
+            ],
             "essential": true,
             "cpu": 256,
             "memory": 512
@@ -24,6 +27,9 @@
                     "containerPort": 1433,
                     "protocol": "tcp"
                 }
+            ],
+            "requiresCompatibilities": [
+                "FARGATE"
             ],
             "essential": true,
             "cpu": 256,
