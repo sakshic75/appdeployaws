@@ -8,11 +8,12 @@
             "containerPort": 3000
         },
         {
-            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-southeast-2:914221124747:targetgroup/mssql/c5c8089202ca93c3",
-            "containerName": "mssql",
+            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-southeast-2:914221124747:targetgroup/mssql/9f3177d32e03fce8",
+            "containerName": "",
             "containerPort": 1433
         }
     ],
+    "launchType":"FARGATE",
     "desiredCount": 1,
     "schedulingStrategy": "REPLICA",
     "deploymentController": {
@@ -25,7 +26,7 @@
                 "subnet-c7133c8e"
             ],
             "securityGroups": [
-                "sg-0c5811164674fbe17"
+                "security-group-1"
             ],
             "assignPublicIp": "ENABLED"
         }

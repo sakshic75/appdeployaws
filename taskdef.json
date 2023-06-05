@@ -4,6 +4,9 @@
     "executionRoleArn": "arn:aws:iam::914221124747:role/service-role/codebuild-project-test-service-role",
     "cpu": "256",
     "memory": "512",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
     "containerDefinitions": [
         {
             "name": "<APP_NAME>",
