@@ -12,7 +12,7 @@ WORKDIR /app
 COPY  package.json package-lock.json ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f package-lock.json ]; then npm ci && npm install -g npm@9.6.7; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
@@ -63,6 +63,4 @@ USER nextjs
 ENV PORT ${PORT}
 EXPOSE ${PORT}
 
-
-RUN npm install
 CMD ["npm", "run", "dev"]
