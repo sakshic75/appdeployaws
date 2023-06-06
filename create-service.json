@@ -1,5 +1,5 @@
 {
-    "taskDefinition": "demoapp-defintion:25",
+    "taskDefinition": "demoapp-defintion:27",
     "cluster": "demoap-cluster-test",
     "loadBalancers": [
         {
@@ -13,7 +13,7 @@
     "desiredCount": 1,
     "schedulingStrategy": "REPLICA",
     "deploymentController": {
-        "type": "CODE_DEPLOY"
+        "type": "ECS"
     },
     "networkConfiguration": {
         "awsvpcConfiguration": {
