@@ -1,6 +1,6 @@
 [
     {
         "name": "demoapp",
-        "imageUri": "<IMAGE_NAME>"
+        "ImageURI": "<IMAGE_NAME>"
     }
 ]
