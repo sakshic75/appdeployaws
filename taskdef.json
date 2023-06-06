@@ -11,7 +11,7 @@
        
         {
             "name": "demoapp",
-            "image": "<IMAGE_NAME>",
+            "image": "914221124747.dkr.ecr.ap-southeast-2.amazonaws.com/demoapp:latest",
             "essential":true,
             "portMappings": [
                 {
