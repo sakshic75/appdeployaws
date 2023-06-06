@@ -1,0 +1,13 @@
+{
+    "imageDetails": [
+
+        {"image":"IMAGE_NAME",
+        "imageUri":"<IMAGE_NAME>"},
+        
+        
+        {"image":"IMAGE_DB_NAME",
+        "imageUri":"<IMAGE_DB_NAME>"
+        }
+    ]
+  }
+  
