@@ -1,0 +1,12 @@
+[
+
+        {"name":"IMAGE_NAME",
+        "imageUri":"<IMAGE_NAME>"},
+        
+        
+        {"name":"IMAGE_DB_NAME",
+        "imageUri":"<IMAGE_DB_NAME>"
+        }
+    ]
+
+  
