@@ -1,23 +1,18 @@
 {
-    "taskDefinition": "demoapp-defintion:19",
+    "taskDefinition": "demoapp-defintion:23",
     "cluster": "demoap-cluster-test",
     "loadBalancers": [
-        {
-            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-southeast-2:914221124747:targetgroup/target-e2e-test/9f3177d32e03fce8",
-            "containerName": "demoapp",
-            "containerPort": 3000
-        },
         {
             "targetGroupArn": "arn:aws:elasticloadbalancing:ap-southeast-2:914221124747:targetgroup/mssql/c5c8089202ca93c3",
             "containerName": "mssql",
             "containerPort": 1433
         }
     ],
-    "launchType":"FARGATE",
+    "launchType": "FARGATE",
     "desiredCount": 1,
     "schedulingStrategy": "REPLICA",
     "deploymentController": {
-        "type": "CODE_DEPLOY"
+        "type": "ECS"
     },
     "networkConfiguration": {
         "awsvpcConfiguration": {
@@ -26,7 +21,7 @@
                 "subnet-c7133c8e"
             ],
             "securityGroups": [
-                "sg-0c5811164674fbe17"
+                "sg-c60524be"
             ],
             "assignPublicIp": "ENABLED"
         }

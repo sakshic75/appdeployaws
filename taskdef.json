@@ -8,19 +8,7 @@
         "FARGATE"
     ],
     "containerDefinitions": [
-        {
-            "name": "demoapp",
-            "image": "<IMAGE_NAME>",
-            "essential":true,
-            "portMappings": [
-                {
-                    "containerPort": 3000,
-                    "protocol": "tcp"
-                }
-            ]
-           
-            
-        },
+       
         {
             "name": "mssql",
             "image": "<IMAGE_DB_NAME>",

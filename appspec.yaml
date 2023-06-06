@@ -5,8 +5,8 @@ Resources:
       Properties:
         TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
-            ContainerName: "demoapp"
-            ContainerPort : 3000
+          ContainerName: "mssql"
+          ContainerPort : 1433
 Hooks:
 - BeforeInstall: "BeforeInstallHookFunctionName"
 - AfterInstall: "AfterInstallHookFunctionName"

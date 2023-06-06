@@ -1,12 +1,6 @@
 [
-
-        {"name":"demoapp",
-        "imageUri":"<IMAGE_NAME>"},
-        
-        
-        {"name":"mssql",
-        "imageUri":"<IMAGE_DB_NAME>"
-        }
-    ]
-
-  
+    {
+        "name": "mssql",
+        "imageUri": "<IMAGE_DB_NAME>"
+    }
+]
