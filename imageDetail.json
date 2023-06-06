@@ -1,5 +1,4 @@
-{
-    "imageDetails": [
+[
 
         {"image":"IMAGE_NAME",
         "imageURI":"<IMAGE_NAME>"},
@@ -9,5 +8,5 @@
         "imageURI":"<IMAGE_DB_NAME>"
         }
     ]
-  }
+
   
