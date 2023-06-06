@@ -64,5 +64,5 @@ ENV PORT ${PORT}
 EXPOSE ${PORT}
 
 
-
+RUN npm install -g npm@9.6.7
 CMD ["npm", "run", "dev"]
