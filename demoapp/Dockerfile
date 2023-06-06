@@ -59,6 +59,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/pages ./pages
+COPY --from=builder /app/styles ./styles
+
 
 USER nextjs
 ENV PORT ${PORT}
