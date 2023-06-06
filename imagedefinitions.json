@@ -1,6 +1,6 @@
 [
     {
-        "name": "mssql",
-        "imageUri": "<IMAGE_DB_NAME>"
+        "name": "demoapp",
+        "imageUri": "<IMAGE_NAME>"
     }
 ]

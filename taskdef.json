@@ -10,12 +10,12 @@
     "containerDefinitions": [
        
         {
-            "name": "mssql",
-            "image": "<IMAGE_DB_NAME>",
+            "name": "demoapp",
+            "image": "<IMAGE_NAME>",
             "essential":true,
             "portMappings": [
                 {
-                    "containerPort": 1433,
+                    "containerPort": 3000,
                     "protocol": "tcp"
                 }
             ]
