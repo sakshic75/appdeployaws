@@ -2,11 +2,11 @@
     "imageDetails": [
 
         {"image":"IMAGE_NAME",
-        "imageUri":"<IMAGE_NAME>"},
+        "imageURI":"<IMAGE_NAME>"},
         
         
         {"image":"IMAGE_DB_NAME",
-        "imageUri":"<IMAGE_DB_NAME>"
+        "imageURI":"<IMAGE_DB_NAME>"
         }
     ]
   }
