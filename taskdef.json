@@ -20,18 +20,6 @@
                 }
             ]
            
-        },
-        {
-            "name": "mssql",
-            "image": "914221124747.dkr.ecr.ap-southeast-2.amazonaws.com/mssql:latest",
-            "essential":true,
-            "portMappings": [
-                {
-                    "containerPort": 1433,
-                    "protocol": "tcp"
-                }
-            ]
-           
         }
     ]
     
