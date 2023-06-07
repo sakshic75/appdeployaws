@@ -2,9 +2,5 @@
     {
         "name": "demoapp",
         "imageUri": "914221124747.dkr.ecr.ap-southeast-2.amazonaws.com/demoapp:latest"
-    },
-    {
-        "name": "mssql",
-        "imageUri": "914221124747.dkr.ecr.ap-southeast-2.amazonaws.com/mssql:latest"
     }
 ]
