@@ -1,5 +1,5 @@
 {
-    "taskDefinition": "demoapp-defintion:36",
+    "taskDefinition": "demoapp-defintion:40",
     "cluster": "demoap-cluster-test",
     "loadBalancers": [
         {
