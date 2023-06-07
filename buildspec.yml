@@ -30,6 +30,8 @@ phases:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
 
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG
+      - docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG
+      - docker run -p 1433:1433 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG
 
       # - sed -i 's|<IMAGE_NAME>|'$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP'\:'$AWS_IMAGE_TAG'|g' imagedefinitions.json
       # - sed -i 's|<IMAGE_NAME>|'$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP'\:'$AWS_IMAGE_TAG'|g' taskdef.json
