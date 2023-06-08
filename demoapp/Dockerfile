@@ -71,5 +71,5 @@ USER nextjs
 ENV PORT ${PORT}
 EXPOSE ${PORT}
 
-# CMD ["npm", "start"]
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
+#CMD ["node", "server.js"]
