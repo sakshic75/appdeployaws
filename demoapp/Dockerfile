@@ -58,7 +58,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
-# COPY . .
+COPY . .
 # COPY --from=builder /app/styles ./styles
 
 
@@ -66,5 +66,5 @@ USER nextjs
 ENV PORT ${PORT}
 EXPOSE ${PORT}
 
-# CMD ["npm", "run", "dev"]
-CMD ["node", "server.js"]
+CMD ["npm", "run", "dev"]
+# CMD ["node", "server.js"]
