@@ -1,7 +1,10 @@
 console.log(process.env);
 
 module.exports = {
-  output: 'standalone',
+  // output: 'standalone',
+  experimental: {
+    outputStandalone: true,
+  },
   env: {
     title: process.env.NEXT_PUBLIC_TITLE,
     baseUrl: "http://localhost:" + process.env.PORT,
