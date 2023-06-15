@@ -3,8 +3,11 @@ import sql from "mssql";
 const sqlConfig = {
   user: "sa",
   password: "Passw@rd2022",
+  user: "admin",
+  password: "Password123",
   database: "Temp",
-  server: process.env.DBHOST || "localhost",
+  server: "demo-rds-rdsinstance-fn7fgoy4cbhq.cllyrwnpctog.ap-southeast-2.rds.amazonaws.com",
+  // server: process.env.DBHOST || "localhost",
   port: 1433,
   pool: {
     max: 10,
