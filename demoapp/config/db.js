@@ -1,8 +1,8 @@
 import sql from "mssql";
 
 const sqlConfig = {
-  user: "sa",
-  password: "Passw@rd2022",
+  //user: "sa",
+  //password: "Passw@rd2022",
   user: "admin",
   password: "Password123",
   database: "Temp",
