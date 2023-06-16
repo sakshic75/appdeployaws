@@ -88,7 +88,7 @@ Resources:
             MonitoringInterval: 60
             EnableIAMDatabaseAuthentication: false
             EnablePerformanceInsights: false
-            DeletionProtection: true
+            DeletionProtection: false
             DBSubnetGroupName: !Ref RDSDBSubnetGroup
             VPCSecurityGroups: 
               - !Ref EC2SecurityGroup
