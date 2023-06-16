@@ -1,6 +1,6 @@
-CREATE DATABASE productsdb IF NOT EXISTS;
+CREATE DATABASE Temp IF NOT EXISTS;
 
-use productsdb;
+use Temp;
 
 CREATE TABLE product(
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -10,4 +10,4 @@ CREATE TABLE product(
   createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-describe product;
+describe Temp;

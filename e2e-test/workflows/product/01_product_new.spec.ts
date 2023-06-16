@@ -19,16 +19,16 @@ test.describe("Check the functionality of the new product page @new", () => {
   test("has title Write a Description @smoke", async ({ page }) => {
     await expect(pageNew.getDescriptionInput).toBeDefined();
   });
-  // test("Check the placeholder for labels ", async ({ page }) => {
-  //   const label = pageNew.getNameInput;
-  //   const placeholder = await label.getAttribute("placeholder");
-  //   expect(placeholder).toBe("name");
-  // });
-  // test("Event on clicking Save Product ", async ({ page }) => {
-  //   await pageNew.getNameInput.fill("Apples");
-  //   await pageNew.getPriceInput.fill("2");
-  //   await pageNew.getDescriptionInput.fill("Queensland red apples");
-  //   await pageNew.getSaveButtonProduct.click();
-  //   await expect(pageNew.page).toHaveURL("/products");
-  // });
+  test("Check the placeholder for labels ", async ({ page }) => {
+    const label = pageNew.getNameInput;
+    const placeholder = await label.getAttribute("placeholder");
+    expect(placeholder).toBe("name");
+  });
+  test("Event on clicking Save Product ", async ({ page }) => {
+    await pageNew.getNameInput.fill("Apples");
+    await pageNew.getPriceInput.fill("2");
+    await pageNew.getDescriptionInput.fill("Queensland red apples");
+    await pageNew.getSaveButtonProduct.click();
+    await expect(pageNew.page).toHaveURL("/products");
+  });
 });
