@@ -7,7 +7,7 @@ const sqlConfig = {
   password: "Password123",
   database: "Temp",
   //server: "demo-rds-rdsinstance-fn7fgoy4cbhq.cllyrwnpctog.ap-southeast-2.rds.amazonaws.com",
-  server: "demo-rds-mssql-rdsinstance-em03etizu4by.cllyrwnpctog.ap-southeast-2.rds.amazonaws.com",
+  server: "aws-dxl-database-1-rdsinstance-kbobfq754ine.cllyrwnpctog.ap-southeast-2.rds.amazonaws.com",
   // server: process.env.DBHOST || "localhost",
   port: 1433,
   pool: {

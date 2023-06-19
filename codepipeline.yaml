@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  RepositoryName:
+    Type: String
+    Description: Name of the ECR repository
+  CodeCommitRepository:
+    Type: String
+    Description: Name of the CodeCommit repository
+  CodeBuildProjectName:
+    Type: String
+    Description: Name of the CodeBuild project
+  ECSStackName:
+    Type: String
+    Description: Name of the ECS stack
+  ECSClusterName:
+    Type: String
+    Description: Name of the ECS cluster
+Resources:
+  ArtifactStoreBucket:
+    DeletionPolicy: Retain
+    Type : 'AWS::S3::Bucket'
+  CodePipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      Name: !Sub '${RepositoryName}-pipeline'
+      # RoleArn: !GetAtt CodePipelineRole.Arn
+      RoleArn: 'arn:aws:iam::914221124747:role/service-role/AWSCodePipelineServiceRole-ap-southeast-2-pipeline-training'
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: SourceAction
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Provider: CodeCommit
+                Version: '1'
+              Configuration:
+                RepositoryName: !Ref CodeCommitRepository
+                BranchName: main
+              OutputArtifacts:
+                - Name: SourceOutput
+              
+        - Name: Build
+          Actions:
+            - Name: BuildAction
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: '1'
+              Configuration:
+                ProjectName: !Ref CodeBuildProjectName
+              InputArtifacts:
+                - Name: SourceOutput
+              OutputArtifacts:
+                - Name: BuildOutput
+        - Name: Deploy
+          Actions:
+            - Name: DeployAction
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: ECS
+                Version: '1'
+              Configuration:
+                ClusterName: !Ref ECSClusterName
+                ServiceName: !Ref ECSStackName
+                FileName: imagedefinitions.json
+              InputArtifacts:
+                - Name: BuildOutput
+      ArtifactStores :
+      - ArtifactStore :
+          Type: S3
+          Location : codepipeline-ap-southeast-2-829095007813
+        Region: !Ref 'AWS::Region'
+#   CodePipelineRole:
+#     Type: AWS::IAM::Role
+#     Properties:
+#       AssumeRolePolicyDocument:
+#         Version: '2012-10-17'
+#         Statement:
+#           - Effect: Allow
+#             Principal:
+#               Service: codepipeline.amazonaws.com
+#             Action: sts:AssumeRole
+#       Path: "/"
+#       ManagedPolicyArns:
+#         - arn:aws:iam::914221124747:role/service-role/AWSCodePipelineServiceRole-ap-southeast-2-pipeline-training
+# Outputs:
+#   ServiceEndpoint:
+#     Description: DNS name of the deployed ECS service
+#     Value: !GetAtt ECSClusterName.Outputs.ServiceEndpoint
+#   ServicePort:
+#     Description: Port of the deployed ECS service
+#     Value: !GetAtt ECSClusterName.Outputs.ServicePort
