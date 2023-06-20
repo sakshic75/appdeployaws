@@ -99,51 +99,51 @@ Resources:
           ToPort: 1433
           CidrIp: 0.0.0.0/0
       VpcId: !Ref VPC  # Replace with your VPC ID
-  MyTargetGroup:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      Name: MyTargetGroup
-      Port: !Ref Port
-      Protocol: HTTP
-      TargetType: instance
-      VpcId: !Ref VPC
-      HealthCheckEnabled: true
-      HealthCheckIntervalSeconds: 30
-      HealthCheckPath: /
-      HealthCheckProtocol: HTTP
-      HealthCheckTimeoutSeconds: 5
-      HealthyThresholdCount: 2
-      UnhealthyThresholdCount: 2
+  # MyTargetGroup:
+  #   Type: AWS::ElasticLoadBalancingV2::TargetGroup
+  #   Properties:
+  #     Name: MyTargetGroup
+  #     Port: !Ref Port
+  #     Protocol: HTTP
+  #     TargetType: instance
+  #     VpcId: !Ref VPC
+  #     HealthCheckEnabled: true
+  #     HealthCheckIntervalSeconds: 30
+  #     HealthCheckPath: /
+  #     HealthCheckProtocol: HTTP
+  #     HealthCheckTimeoutSeconds: 5
+  #     HealthyThresholdCount: 2
+  #     UnhealthyThresholdCount: 2
 
-  MyLoadBalancer:
-    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
-    Properties:
-      Name: MyLoadBalancer
-      Subnets:
-        - !Ref PrivateSubnet01
-        - !Ref PrivateSubnet02
-      SecurityGroups:
-        - sg-c60524be
-      Type: application
-      IpAddressType: ipv4
-      Scheme: internet-facing
-      LoadBalancerAttributes:
-        - Key: idle_timeout.timeout_seconds
-          Value: '60'
-      Tags:
-        - Key: Name
-          Value: MyLoadBalancer
-    DependsOn: MyTargetGroup
+  # MyLoadBalancer:
+  #   Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+  #   Properties:
+  #     Name: MyLoadBalancer
+  #     Subnets:
+  #       - !Ref PrivateSubnet01
+  #       - !Ref PrivateSubnet02
+  #     SecurityGroups:
+  #       - sg-c60524be
+  #     Type: application
+  #     IpAddressType: ipv4
+  #     Scheme: internet-facing
+  #     LoadBalancerAttributes:
+  #       - Key: idle_timeout.timeout_seconds
+  #         Value: '60'
+  #     Tags:
+  #       - Key: Name
+  #         Value: MyLoadBalancer
+  #   DependsOn: MyTargetGroup
 
-  MyListener:
-    Type: AWS::ElasticLoadBalancingV2::Listener
-    Properties:
-      LoadBalancerArn: !Ref MyLoadBalancer
-      Port: !Ref Port
-      Protocol: HTTP
-      DefaultActions:
-        - Type: forward
-          TargetGroupArn: !Ref MyTargetGroup
+  # MyListener:
+  #   Type: AWS::ElasticLoadBalancingV2::Listener
+  #   Properties:
+  #     LoadBalancerArn: !Ref MyLoadBalancer
+  #     Port: !Ref Port
+  #     Protocol: HTTP
+  #     DefaultActions:
+  #       - Type: forward
+  #         TargetGroupArn: !Ref MyTargetGroup
 Outputs:
    SQLDatabaseEndpoint:
      Description: Database endpoint

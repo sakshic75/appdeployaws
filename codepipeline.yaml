@@ -1,5 +1,17 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
+  VPC:
+    Type: String
+    Description: The VPC to create the cluster
+    Default: vpc-5cc68c3b
+  PrivateSubnet01:
+    Type: String
+    Description: The subnet for the DB cluster
+    Default: subnet-c7133c8e 
+  PrivateSubnet02:
+    Type: String
+    Description: The subnet for the DB cluster
+    Default: subnet-01ddef66
   RepositoryName:
     Type: String
     Description: Name of the ECR repository
@@ -15,10 +27,127 @@ Parameters:
   ECSClusterName:
     Type: String
     Description: Name of the ECS cluster
+  ImageDefintionFileName:
+    Type: String
+    Description: Name of the Imagedefiniton file
+  Port:
+    Type: Number
+    Description: Port for the application 
+    Default : 3000
 Resources:
-  ArtifactStoreBucket:
-    DeletionPolicy: Retain
-    Type : 'AWS::S3::Bucket'
+  MyTargetGroup1:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: MyTargetGroup1
+      Port: !Ref Port
+      Protocol: HTTP
+      VpcId: !Ref VPC
+      TargetType: ip
+      # Other properties of the target group
+
+  MyTargetGroup2:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: MyTargetGroup2
+      Port: 3010
+      Protocol: HTTP
+      VpcId: !Ref VPC
+      TargetType: ip
+      # Other properties of the target group
+
+  MyLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: MyLoadBalancer
+      Scheme: internet-facing
+      Subnets:
+        - !Ref PrivateSubnet01
+        - !Ref PrivateSubnet02
+      SecurityGroups:
+        - sg-c60524be
+      Type: application
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: '60'
+      # Listeners:
+      #   - Port: !Ref Port
+      #     Protocol: HTTP
+      #     DefaultActions:
+      #       - Type: forward
+      #         TargetGroupArn: !Ref MyTargetGroup1
+      #   - Port: 3010
+      #     Protocol: HTTP
+      #     DefaultActions:
+      #       - Type: forward
+      #         TargetGroupArn: !Ref MyTargetGroup2
+  MyListener1:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref MyLoadBalancer
+      Port: !Ref Port
+      Protocol: HTTP
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref MyTargetGroup1
+  MyListener2:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref MyLoadBalancer
+      Port: 3010
+      Protocol: HTTP
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref MyTargetGroup2
+
+  ECSCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Ref ECSClusterName
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Ref ECSStackName
+      NetworkMode: awsvpc
+      ExecutionRoleArn: arn:aws:iam::914221124747:role/service-role/codebuild-project-test-service-role
+      Cpu: 256
+      Memory: 512
+      RequiresCompatibilities:
+       - FARGATE
+      ContainerDefinitions:
+        - Name: !Ref RepositoryName
+          Image: !Sub '${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${RepositoryName}:latest'
+          PortMappings:
+            - ContainerPort: !Ref Port
+
+  Service:
+    Type: AWS::ECS::Service
+    DependsOn:
+    - MyListener1
+    - MyListener2
+    - MyLoadBalancer
+    Properties:
+      Cluster: !Ref ECSCluster
+      ServiceName: !Ref ECSStackName
+      TaskDefinition: !Ref TaskDefinition
+      DesiredCount: 1
+      SchedulingStrategy: REPLICA
+      LaunchType: FARGATE
+      DeploymentController:
+        Type: ECS
+      LoadBalancers:
+        - TargetGroupArn: !Ref MyTargetGroup1
+        # - TargetGroupArn: 'arn:aws:elasticloadbalancing:ap-southeast-2:914221124747:targetgroup/target-e2e-test/9f3177d32e03fce8'
+          ContainerName: !Ref RepositoryName
+          ContainerPort: !Ref Port
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets:
+            - !Ref PrivateSubnet01
+            - !Ref PrivateSubnet02
+          SecurityGroups:
+            - sg-c60524be
+          AssignPublicIp: ENABLED
   CodePipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
@@ -65,7 +194,7 @@ Resources:
               Configuration:
                 ClusterName: !Ref ECSClusterName
                 ServiceName: !Ref ECSStackName
-                FileName: imagedefinitions.json
+                FileName: !Ref ImageDefintionFileName
               InputArtifacts:
                 - Name: BuildOutput
       ArtifactStores :
