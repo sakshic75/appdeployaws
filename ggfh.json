@@ -1,0 +1,4 @@
+- Effect : Allow
+            Action:
+              - ssm:GetParameters
+            Resource: "arn:aws:ssm:ap-southeast-2:${AWS::AccountId}:parameter/CodeBuild/*"
