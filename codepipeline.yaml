@@ -15,7 +15,7 @@ Parameters:
   RepositoryName:
     Type: String
     Description: Name of the ECR repository
-    Default : demoapp
+    Default : demoapp1
   CodeCommitRepository:
     Type: String
     Description: Name of the CodeCommit repository
