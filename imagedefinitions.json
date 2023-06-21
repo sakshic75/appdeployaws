@@ -1,6 +1,8 @@
 [
+    
+
     {
-        "name": "<AWS_IMAGE_DEMO_APP>",
-        "imageUri": "914221124747.dkr.ecr.ap-southeast-2.amazonaws.com/<AWS_IMAGE_DEMO_APP>:<AWS_IMAGE_TAG>"
+        "name": "<IMAGE_NAME>",
+        "imageUri": "<IMAGE_URI>"
     }
 ]

@@ -20,6 +20,9 @@ phases:
       - docker compose -f docker-compose-cicd.yml run test
       - docker tag $AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG
       - docker tag $AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_MSSQL:$AWS_IMAGE_TAG
+      - echo "Replacing image names in imagedefinitions.json"
+      - sed -i "s|<IMAGE_NAME>|$AWS_IMAGE_DEMO_APP|g" imagedefinitions.json
+      - sed -i "s|<IMAGE_URI>|$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_IMAGE_DEMO_APP:$AWS_IMAGE_TAG|g" imagedefinitions.json
 
   post_build:
     on-failure: ABORT
