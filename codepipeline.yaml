@@ -36,6 +36,11 @@ Parameters:
     Type: String
     Description: Name of the Imagedefiniton file
     Default: imagedefinitions.json
+  BucketName:
+    Type: String
+    Description: Name of the S3 bucket
+    Default: 's323062023'
+  
   Port:
     Type: Number
     Description: Port for the application 
@@ -203,7 +208,8 @@ Resources:
       ArtifactStores :
       - ArtifactStore :
           Type: S3
-          Location : codepipeline-ap-southeast-2-829095007813
+          # Location : codepipeline-ap-southeast-2-829095007813
+          Location : !Ref BucketName
         Region: !Ref 'AWS::Region'
   MyPipelinePolicy:
     Type: AWS::IAM::ManagedPolicy
@@ -383,29 +389,12 @@ Resources:
 
   DemoECRRepository:
     Type: AWS::ECR::Repository
+    DeletionPolicy: Retain
     Properties:
       RepositoryName: !Ref RepositoryName
-      
-        
-           
 
-#   CodePipelineRole:
-#     Type: AWS::IAM::Role
-#     Properties:
-#       AssumeRolePolicyDocument:
-#         Version: '2012-10-17'
-#         Statement:
-#           - Effect: Allow
-#             Principal:
-#               Service: codepipeline.amazonaws.com
-#             Action: sts:AssumeRole
-#       Path: "/"
-#       ManagedPolicyArns:
-#         - arn:aws:iam::914221124747:role/service-role/AWSCodePipelineServiceRole-ap-southeast-2-pipeline-training
-# Outputs:
-#   ServiceEndpoint:
-#     Description: DNS name of the deployed ECS service
-#     Value: !GetAtt ECSClusterName.Outputs.ServiceEndpoint
-#   ServicePort:
-#     Description: Port of the deployed ECS service
-#     Value: !GetAtt ECSClusterName.Outputs.ServicePort
+Outputs:
+  AppUrl:
+    Value: !Sub '${MyLoadBalancer.DNSName}:${Port}'
+
+
